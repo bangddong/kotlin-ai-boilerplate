@@ -1,0 +1,30 @@
+# 기기 로컬 MCP 설정 — 절대경로가 들어간다 (공개 레포)
+.mcp.json
+.claude/settings.local.json
+
+# Gradle / Kotlin
+.gradle/
+build/
+out/
+.kotlin/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# 로컬 설정 · 시크릿
+application-local.yml
+.env
+.env.*
+!.env.example
+
+# IaC (CLAUDE.md 「IaC 를 공개 레포에 둘 때」)
+*.tfstate*
+.terraform/
+*.tfvars
+!*.tfvars.example
+override.tf*
+crash*.log
