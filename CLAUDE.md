@@ -50,10 +50,11 @@ Madi 가 실패해도 작업은 계속한다(fail-open) — 실패한 checkpoint
 - 매 리뷰·판정은 `progress.md` 에 남긴다 — 세션이 바뀌면 기억이 없다. **이 파일이 멘토의 기억이다.**
 - Claude 는 먼저 연락할 수 없다. 일정은 사용자가 관리한다.
 
-## 기술 기준 (M0 에서 최신 안정판 확인 후 고정)
+## 기술 기준 (2026-11-17 M0 골격에서 고정)
 
-Kotlin 2.1 · Java 21 · Spring Boot 4.0.x · Spring AI 2.0 · JPA · PostgreSQL · Redis(Redisson) · Kafka ·
-JUnit5 + AssertJ · Testcontainers · k6. 로컬 인프라는 `docker-compose` — **비용 $0**.
+Kotlin 2.2.21 · Java 21 · Spring Boot 4.0.9 · Gradle 9.9.1 · Spring AI 2.0 · JPA · PostgreSQL · Redis(Redisson) · Kafka ·
+JUnit(Boot 관리 버전 = Jupiter 6.0.3) + AssertJ · Testcontainers · k6. 로컬 인프라는 `docker-compose` — **비용 $0**.
+Kotlin·Gradle 은 Spring Initializr 가 Boot 4.0.9 에 짝지어 주는 버전이다(Boot 4.1.x 는 채택하지 않음 — 문서 기준선 4.0.x 유지).
 
 ## 보안 (공개 레포)
 

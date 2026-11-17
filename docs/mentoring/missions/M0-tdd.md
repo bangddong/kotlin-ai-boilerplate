@@ -10,7 +10,7 @@
 
 ## 제공되는 것 (멘토 작성 · 🔴 수정 금지)
 
-- Gradle 골격(Kotlin 2.1 · Java 21 · Spring Boot 4.0.x · JUnit5 · AssertJ)
+- Gradle 골격(Kotlin 2.2.21 · Java 21 · Spring Boot 4.0.9 · JUnit Jupiter · AssertJ · Mockito) — 테스트 의존성 **추가**는 허용(예: MockK)
 - `infra/memory/` — `CreditTable`, `CreditHistoryTable` (메모리 저장소, **호출마다 무작위 지연** — 경합을 재현하기 위함)
 - `CreditController` 껍데기 (엔드포인트 4개, 본문은 `TODO`)
 
