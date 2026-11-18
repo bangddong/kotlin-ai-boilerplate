@@ -50,10 +50,11 @@ Madi 가 실패해도 작업은 계속한다(fail-open) — 실패한 checkpoint
 - 매 리뷰·판정은 `progress.md` 에 남긴다 — 세션이 바뀌면 기억이 없다. **이 파일이 멘토의 기억이다.**
 - Claude 는 먼저 연락할 수 없다. 일정은 사용자가 관리한다.
 
-## 기술 기준 (M0 에서 최신 안정판 확인 후 고정)
+## 기술 기준 (2026-11-18 M0 골격에서 고정 — 원칙: 최신 안정판)
 
-Kotlin 2.1 · Java 21 · Spring Boot 4.0.x · Spring AI 2.0 · JPA · PostgreSQL · Redis(Redisson) · Kafka ·
-JUnit5 + AssertJ · Testcontainers · k6. 로컬 인프라는 `docker-compose` — **비용 $0**.
+Kotlin 2.4.21 · Java 25(LTS) · Spring Boot 4.1.2 · Gradle 9.9.1 · Spring AI(도입 시점 최신 안정판) · JPA · PostgreSQL ·
+Redis(Redisson) · Kafka · JUnit(Boot 관리) + AssertJ · Testcontainers · k6. 로컬 인프라는 `docker-compose` — **비용 $0**.
+베이스 패키지 = `io.github.bangddong.ai`(보일러플레이트라 도메인명을 넣지 않는다). 빌드 = `JAVA_HOME` 을 JDK 25 로.
 
 ## 보안 (공개 레포)
 
@@ -83,7 +84,7 @@ JUnit5 + AssertJ · Testcontainers · k6. 로컬 인프라는 `docker-compose` �
 ## 커밋 · PR
 
 - `<type>(<scope>): <message>` · type = feat/fix/refactor/test/docs/chore · 메시지 한국어 현재형
-- Co-Authored-By 태그 금지 · PR 본문 한국어 · main 직접 push 금지(PR 로 제출 — 그게 과제 제출이다). 유일한 예외 = 빈 레포의 **최초 커밋**(이 문서들 + `.gitignore`)
+- Co-Authored-By · Claude-Session 등 **AI 트레일러·세션 링크 금지**(커밋·PR 본문 모두) · PR 본문 한국어 · main 직접 push 금지(PR 로 제출 — 그게 과제 제출이다). 유일한 예외 = 빈 레포의 **최초 커밋**(이 문서들 + `.gitignore`)
 
 ## 스킬 (`.claude/skills/` — devquest 에서 효과가 확인된 것만 가져왔다)
 
