@@ -36,6 +36,7 @@
 
 ## 문서 지도
 
+- **상위 기준 = [`competencies.md`](competencies.md)** — 역량 C1~C8 · 근거 · AI 사용 정책. 미션은 이 역량을 측정한다
 - 요구사항 = [`scenario.md`](scenario.md)
 - 미션(발제 원본) = `missions/M<n>-*.md` — 마일스톤 시작 시 GitHub Issue 로 올린다
   [M0](missions/M0-tdd.md) · [M1](missions/M1-clean-architecture.md) · [M2](missions/M2-server.md) · [M3](missions/M3-concurrency.md) · [M4](missions/M4-cache-queue.md) · [M5](missions/M5-index-transaction.md) · [M6](missions/M6-kafka.md) · [M7](missions/M7-load-incident.md) · [M8](missions/M8-service-split.md)
@@ -44,6 +45,6 @@
 ## 마일스톤마다 같은 형식
 
 1. 발제 Issue (개요 · 기본/심화 · 통과 기준)
-2. 구현 → PR 제출 → 리뷰 → 수정 → 판정
+2. 구현 → PR 제출(본문 = 리뷰 포인트 + **AI 사용 기록**) → 리뷰 → 수정 → 판정
 3. 이해도 퀴즈
 4. 회고 → 블로그(`study-log`)
