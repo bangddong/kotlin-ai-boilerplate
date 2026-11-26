@@ -1,0 +1,43 @@
+# 학습자 설정 — 멘토가 세션 시작 때 읽는다 (.claude/output-styles/mentor.md §0)
+#
+#   cp .mentor/learner.example.yml .mentor/learner.yml   # learner.yml 은 gitignore — 사람마다 다르다
+#
+# 바꾸면 다음 세션(또는 /clear)부터 적용된다.
+# 🔴 코스 규칙이 이 파일보다 우선한다: CLAUDE.md · 미션 문서 · competencies.md §5 의 「직접」 영역은
+#    여기서 줄일 수 없다(넓히는 것만 된다). 예: M0 는 무엇을 고르든 「전부 직접」.
+
+# 무엇을 기르고 싶은가
+#   code    — 직접 짜는 비중을 늘린다. AI 작성 영역을 설정·서식으로 좁히고, 힌트 사다리로 이끈다
+#   design  — 설계 질문과 반대 설계를 자주. 직접 영역 밖 구현은 AI 가 쓰고 검수는 가볍게
+#   review  — AI 작성 + 검수 게이트를 엄격하게, 리뷰 드릴을 자주
+#   mixed   — 기본 균형 (competencies.md §5 그대로)
+goal: mixed
+
+# 멘토가 얼마나 끼어드나
+#   0 — 지켜보기: 묻지 않으면 끼어들지 않는다. 검수 게이트는 PR 리뷰 때만
+#   1 — 질문만: 설계 질문·검수 질문은 하되 힌트는 요청할 때만
+#   2 — 힌트 사다리: 기본. 질문 → 방향 → 개념 → API → 스케치
+#   3 — 엄격: 2 + 힌트를 한 단계씩만, 직접 영역 코드 요청은 매번 거절.
+#       🟡 편집 차단은 스타일로 보장되지 않는다(훅 필요 — 엔진을 플러그인으로 뗄 때 넣는다)
+intervention: 2
+
+# 결함을 알리고 심은 코드로 리뷰 연습 (competencies.md §5 「리뷰 드릴」)
+drill:
+  frequency: per-milestone   # off | on-request | per-milestone | often(주 1회 정도)
+  disclose_count: true       # true = 결함 개수를 알려 준다(쉬움) · false = 실전
+  defects: 2-4               # 한 드릴에 심는 결함 수
+
+# 반대 설계를 얼마나 자주 내놓나 (mentor.md §1)
+counter_design: sometimes    # off | sometimes(트레이드오프가 클 때만) | always
+
+# 설명의 깊이와 질문 난이도를 맞추는 데 쓴다
+profile:
+  position: backend          # backend | frontend | fullstack | mobile | data | infra | ...
+  years: 0                   # 실무 연차
+  background: ""             # 예: "Java/Spring 4년, Kotlin 처음"
+  weak: []                   # 예: [부하 테스트, 관측성] — 이 주제는 작은 단계로, 설명을 더
+  strong: []                 # 이 주제는 개입을 줄인다
+
+# 답변 방식
+language: ko
+verbosity: short             # short | normal — 설명은 짧게, 상호작용은 잦게가 기본
