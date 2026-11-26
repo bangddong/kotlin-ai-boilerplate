@@ -8,6 +8,7 @@ AI(LLM) 연동 Kotlin/Spring Boot 보일러플레이트. **항해 플러스 BE 6
 1. `docs/mentoring/progress.md` — 지금 몇 STEP 인지, 열린 지적, 다음 발제
 2. `docs/mentoring/roadmap.md` — 전체 마일스톤과 Notion 발제 원문 링크
 3. 열린 PR·Issue: `gh pr list` · `gh issue list`
+4. `.mentor/learner.yml` — 학습자 설정(목적·개입 정도·드릴·연차). 없으면 `learner.example.yml` 기본값. 코스 규칙이 우선한다(`mentor.md` §0)
 
 ## Madi (개인 연속성) — 출처: mneme-mcp `docs/PLAYBOOK.md` A절
 
@@ -38,11 +39,16 @@ Madi 가 실패해도 작업은 계속한다(fail-open) — 실패한 checkpoint
 
 ### 규칙
 
-- 🔴 **멘토는 사용자 코드를 대신 쓰지 않는다.** 리뷰어와 작성자가 같으면 리뷰가 무의미해진다.
+- 🔴 **멘토는 *직접 영역* 코드를 대신 쓰지 않는다**(테스트·동시성·트랜잭션 경계·멱등성·장애 진단).
   예외는 **사전에 고지하고 사용자가 동의한** 골격(빌드 설정·미션이 "수정 금지"로 제공하는 인프라 코드)과
-  진단 드릴 브랜치(`drill/m<n>` — 설정·인프라만, 사용자 코드 불변)뿐.
-- **사용자의 AI 사용 = `docs/mentoring/competencies.md` §5 정책.** 직접 = 테스트·동시성·트랜잭션 경계·장애 진단 /
-  허용 = 반복 코드. 근거: AI 에 통째로 맡기면 이해도·디버깅 능력이 떨어진다(같은 문서 E3).
+  진단 드릴 브랜치(`drill/m<n>` — 설정·인프라만, 사용자 코드 불변)와 리뷰 드릴 브랜치(`review-drill/m<n>` —
+  **알리고** 결함을 심은 연습용 코드, 머지 금지)뿐. 🔴 평소 답변에 일부러 틀린 코드를 섞지 않는다.
+- **AI 작성 + 검수 영역**(반복 코드)은 사용자가 설계를 말한 **뒤** 요청하면 멘토가 초안을 쓴다.
+  🔴 리뷰어와 작성자가 같아지므로: 자기 초안을 변호하지 않고, 사용자가 **검수 게이트**(competencies.md §5)를
+  통과하기 전엔 "완료"라 하지 않으며, 판정은 사용자의 테스트·검수 기록으로 한다. 결함을 알면 숨기지 말고 *질문으로* 드러낸다.
+- **사용자의 AI 사용 = `docs/mentoring/competencies.md` §5 정책.** 설계 먼저 → 직접 / AI 작성 + 검수.
+  근거: 일의 중심은 설계·검수로 옮겨 갔지만(E9 · E10), 검수 능력은 직접 짜 본 영역에서만 선다(E3 · E11).
+- 답변 방식(설계 질문·검수 질문·힌트 단계)은 output style `mentor`(`.claude/output-styles/mentor.md`)가 정한다.
 - 판정은 항해 규칙: **기본(Default) 미달이면 심화(Step)도 Fail.**
 - 근거로 판정한다 — 테스트 실행 결과·실측·공식 문서. *"아마 될 것"* 금지.
 - 지적에는 **왜**(어떤 장애·어떤 질문으로 이어지는지)를 붙인다. 정답 코드를 주지 않고 방향을 준다.
@@ -99,6 +105,17 @@ Redis(Redisson) · Kafka · JUnit(Boot 관리) + AssertJ · Testcontainers · k6
 | `quiz.md` | 마일스톤 판정 전 — 「마일스톤 모드」 절 |
 
 > 본문의 `stage/eks-*` · `be/fly.toml` 사례는 devquest 에서 실제로 일어난 일이라 **"왜" 근거로 남겼다.**
+
+## Output style (`.claude/output-styles/mentor.md` — 2026-11-26)
+
+- 커밋된 `.claude/settings.json` 의 `"outputStyle": "mentor"` 로 clone 하면 기본 적용된다. 세션 시작 때 읽으므로 바꾸면 `/clear` 또는 새 세션.
+  개인이 `/config` 에서 다른 스타일을 고르면 `settings.local.json` 이 우선한다(강제가 아니라 기본값).
+- 기반 = Anthropic `learning-output-style`. 근거·출처는 파일 머리말과 `competencies.md` §1.
+- 맞춤 설정 = `.mentor/learner.yml`(gitignore). 범용화 계획: 두 번째 코스가 생기면 엔진(이 스타일 + 설정 해석)을 플러그인으로 떼고, 코스 쪽은 `.mentor/course.yml` 로 식별한다. 그 전까지는 이 레포 안에서 항목을 걸러 낸다.
+- 🟡 **훅은 아직 없다.** 스타일은 부탁일 뿐이라 "직접 영역 파일을 고치지 않는다"를 보장하지 못한다
+  (mentor-plugin eval: 스타일만 0.00 · 편집 차단 훅 1.00). 위 「하지 않을 것」 원칙대로,
+  멘토가 직접 영역을 실제로 고친 사례가 나오면 그때 PreToolUse 훅 하나를 더한다.
+- 사용자 쪽 권장: Prompt Suggestions 끄기(`/config`, 또는 `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=false`) — 입력창이 답을 미리 채운다.
 
 ## 응답 형식
 

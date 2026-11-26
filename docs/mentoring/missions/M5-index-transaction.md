@@ -23,6 +23,7 @@
 - [ ] **사용량 이벤트**(scenario 심화 8) — `@TransactionalEventListener` 로 평가 성공에 영향 없이 외부 플랫폼(스텁) 전달
 - [ ] **서비스 분리 설계 문서** — credit · ai-evaluation · usage 를 나눈다면 어디를 자르고, 분산 트랜잭션의 한계(보상 트랜잭션 · SAGA)를 어떻게 다루는가 → `docs/reports/M5-service-split.md` (M8 에서 실행한다)
 - [ ] 🆕 **AI 초안 검증** (C2 · `competencies.md` §5) — 대상: LLM 호출을 트랜잭션 밖으로 뺀 흐름(차감 → 호출 → 저장/환불). 내 구현을 끝낸 **뒤** 같은 요구를 AI 에 맡겨 초안을 받아 `ai-draft/m5` 브랜치에 둔다(머지 안 함). **내 테스트를 초안에 돌리고**, 결함·찾은 방법을 `docs/reports/M5-ai-review.md` 에
+- [ ] 🆕 (선택) **리뷰 드릴** (C2 · `competencies.md` §5) — 멘토가 `review-drill/m5` 에 결함을 **알리고** 심은 코드를 둔다(머지 안 함). 이번 주제의 결함 후보: self-invocation 으로 `@Transactional` 무시 · LLM 호출이 트랜잭션 안 · 보상 실패 삼킴. **AI 없이** 리뷰 코멘트로 결함·찾은 방법을 남기고, 멘토가 찾은 것·놓친 것을 결함 종류별로 `progress.md` 에 기록한다. 통과 기준에는 넣지 않는다
 - [ ] 🆕 **고장 진단 드릴** (C5 · `competencies.md` §5) — 멘토가 `drill/m5` 브랜치에 **설정·인프라만** 바꿔 장애를 심는다(사용자 코드 불변). 🔴 diff 를 보지 않고 시작한다. 주어지는 건 증상 한 줄뿐. **AI 없이** 지표·로그로 가설 → 검증을 반복하고, 시각과 함께 `docs/reports/M5-drill.md` 에 남긴다. 원인을 특정한 뒤에만 AI 를 써도 된다
 
 ## 통과 기준 (멘토 판정)

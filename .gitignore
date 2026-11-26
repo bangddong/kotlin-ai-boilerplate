@@ -2,6 +2,9 @@
 .mcp.json
 .claude/settings.local.json
 
+# 학습자 개인 설정 — 사람마다 다르다 (.mentor/learner.example.yml 을 복사해 쓴다)
+.mentor/learner.yml
+
 # Gradle / Kotlin
 .gradle/
 build/
